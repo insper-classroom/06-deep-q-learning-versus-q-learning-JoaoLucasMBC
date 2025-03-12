@@ -1,8 +1,6 @@
 import numpy as np
 import random
-from keras.activations import relu, linear
 import gc
-import keras
 
 class DeepQLearning:
 
@@ -80,7 +78,7 @@ class DeepQLearning:
                 steps += 1
                 action = self.select_action(state)
                 next_state, reward, terminal, truncated, _ = self.env.step(action)
-                if terminal or truncated or (steps>self.max_steps):
+                if terminal or (steps>self.max_steps):
                     done = True          
                 score += reward
                 next_state = np.reshape(next_state, (1, self.env.observation_space.shape[0])).astype(np.float32)
