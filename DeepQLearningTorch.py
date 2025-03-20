@@ -94,7 +94,7 @@ class DeepQLearning:
         if self.epsilon > self.epsilon_min:
             self.epsilon *= self.epsilon_dec
 
-    def train(self):
+    def train(self, verbose=False):
         rewards = []
         for i in range(self.episodes+1):
             (state,_) = self.env.reset()
@@ -116,16 +116,17 @@ class DeepQLearning:
                 self.experience(state, action, reward, next_state, terminal)
                 state = next_state
                 self.experience_replay()
-                if done:
-                    print(f'Episódio: {i+1}/{self.episodes}. Score: {score}')
-                    break
+            
+            if verbose and i % 100 == 0:
+                print(f'Episódio: {i+1}/{self.episodes}. Score: {score}')
+                
             rewards.append(score)
             
             if i % 10 == 0:
                 gc.collect()
             
             # If the average of the last 15 rewards is greater than 450, the environment is considered solved
-            if np.mean(rewards[-15:]) > self.reward_avg_tol:
+            if self.reward_avg_tol is not None and np.mean(rewards[-15:]) > self.reward_avg_tol:
                 print(f'Solved in {i} episodes!')
                 break
 
