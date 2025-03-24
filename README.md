@@ -101,3 +101,7 @@ Como exemplo, abaixo podemos analisar o histograma dos dois ALGORIMOS utilizados
 ![alt text](assets/hist.png)
 
 ![alt text](assets/hist-1.png)
+
+***OBS: no segundo gráfico, a legenda está Q-Learning alpha=0.8, deveria ser Deep Q-Learning***
+
+Podemos ver que o Deep Q-Learning performou melhor, com o resultado mínimo de -160 (que foi próximo do máximo do Q-Learning tradicional), e com uma variância menor. Mais detalhes podem ser encontrados no notebook.
